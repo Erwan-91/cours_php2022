@@ -467,6 +467,149 @@
                         </table>
                     </div>
                     <!-- fin de la colonne (row)  -->
+                    <div class="col-sm-12">
+                        <h3 class="text-center">D. Les opérateurs logiques</h3>
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Opérateur</th>
+                                    <th scope="col">Déscription</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">OR</th>
+                                    <td>
+                                        Teste si l'un des opérandes est vrai : <br>
+                                        $a = TRUE;<br>
+                                        $b = FALSE;<br>
+                                        $c = FALSE;<br>
+                                        $d = ($a OR $b); //$d vaut TRUE. <br>
+                                        $e = ($b OR $c); //$e vaut FALSE. <br>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">||</th>
+                                    <td>
+                                        Equivaut à l'opérateur OR mais n'a pas la même priorité : <br>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">XOR</th>
+                                    <td>
+                                        Teste si un et un seul des opérandes à laa valeur TRUE : <br>
+                                        $a = TRUE;<br>
+                                        $b = FALSE;<br>
+                                        $c = FALSE;<br>
+                                        $d = ($a XOR $b); //$d vaut FALSE. <br>
+                                        $e = ($b OR $c); //$e vaut TRUE. <br>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">AND</th>
+                                    <td>
+                                        Teste si les deux opérandes valent TRUE en même temps : <br>
+                                        $a = TRUE;<br>
+                                        $b = TRUE;<br>
+                                        $c = FALSE;<br>
+                                        $d = ($a AND $b); //$d vaut TRUE. <br>
+                                        $e = ($b AND $c); //$e vaut FALSE. <br>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">&&</th>
+                                    <td>
+                                        Equivaut à l'opérateur AND mais n'a pas la même priorité : <br>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">!</th>
+                                    <td>
+                                        Opérateur de négation, qui inverse la valeur de l'opérande : <br>
+                                        $a = TRUE;<br>
+                                        $b = TRUE;<br>
+                                        $c = !$a; //$c vaut FALSE. <br>
+                                        $d = !$b; //$d vaut TRUE. <br>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p>Attention, une erreur classique dans l'écriture des expressions conditionnelles consiste à confondre l'opérateur de comparaison == avec l'opérateur d'affection =. L'usage des parenthèses dans la rédaction des expressions booléennes est souvent indispensable et toujours recommandé pour éviter les problèmes liés à l'ordre d'évaluation des opérateurs.</p>
+                    </div>
+                    <!-- fin de la colonne (row)  -->
+                </div>
+                <!-- fin de la rangée  -->
+
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h3 class="text-center">E. Les chaînes de caractères</h3>
+                        <p>Les chaînes de caractères sont avec les nombres les types données les plus manipulées sur un site web. De surcroit, dans les échanges entre le client et le serveur au moyen de formulaires, toutes les données sont transmises sous forme de chaînes d'où leur importance.</p>
+                        <p>Une chaîne est une suite de caractères alphanumérique contenue entre de guillemets simples (apostrophe) ou doubles. Si une chaîne contient une variable celle-ci est évaluée et sa valeur incorporée à la chaîne uniquement si vous utilisez des guillemets et non des apostrophes. <br></p>
+                        <?php
+                        $vartest = "coucou";
+                        echo "<p class=\"alert alert-success w-50 text-center mx-auto\">Je dis $vartest !</p>";
+                        // var_dump($vartest); //affiche la valeur de la variable et son type
+                        ?>
+                        <ul>
+                            <li>$a = 'PHP';</li>
+                            <li>$b = 'MYSQL';</li>
+                            <li>$c = "PHP et $b" //affiche PHP et MYSQL</li>
+                            <li>$d = 'PHP et $b; //affiche $b car $ et b sont considérés comme des caractères sans significations particulières</li>
+                        </ul>
+                        <?php
+                        $devise = "La devise de la République Française est : \"Liberté, Egalité, Fraternité\"";
+                        echo "<p class=\"alert alert-success w-75 texte - center mx-auto\">" .$devise." !</p>";
+                        var_dump($devise);
+                        ?>
+                        <h4 class="text-center">a) Les caractères d'échappement</h4>
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Séquence</th>
+                                    <th scope="col">signification</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">\'</th>
+                                    <td>Affiche une apostrophe</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">\"</th>
+                                    <td>Affiche un guillemets</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">$</th>
+                                    <td>Affiche le caractère $</td>
+                                <tr>
+                                    <th scope="row">\\</th>
+                                    <td>Affiche une antislash.</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">\n</th>
+                                    <td>Affiche un saut de ligne(code ASCII 0x0A).</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">\r</th>
+                                    <td>Affiche un retour chariot(code ASCII 0x0D).</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">\t</th>
+                                    <td>Affiche un tabulation horizontale(code ASCII 0x09).</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">\[0-7] {1,3}</th>
+                                    <td> Sequence de caractères ASCII correspondant à un octet ( de 1 à 3 caractères 0 à 7) et affichant le caractère correspondant : 
+                                        echo "\115\171\123\121\114"; Affiche MYSQL</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">\x[0-9 A-F a-f] {1,2}</th>
+                                    <td> Sequence de caractères ASCII correspondant à un octet ( de 1 à 2 caractères 0 à 9 ou A à F ou a à f) et affichant le caractère correspondant :
+                                        echo "\x4D\x79\x53\x51\x4C"; Affiche MYSQL.</td>
+                                </tr>
+                        </table>
+                    </div>
                 </div>
 
 
