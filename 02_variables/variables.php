@@ -559,8 +559,8 @@
                         </ul>
                         <?php
                         $devise = "La devise de la République Française est : \"Liberté, Egalité, Fraternité\"";
-                        echo "<p class=\"alert alert-success w-75 texte - center mx-auto\">" .$devise." !</p>";
-                        var_dump($devise);
+                        echo "<p class=\"alert alert-success w-75 texte - center mx-auto\">" . $devise . " !</p>";
+                        // var_dump($devise);
                         ?>
                         <h4 class="text-center">a) Les caractères d'échappement</h4>
                         <table class="table table-striped">
@@ -600,7 +600,7 @@
                                 </tr>
                                 <tr>
                                     <th scope="row">\[0-7] {1,3}</th>
-                                    <td> Sequence de caractères ASCII correspondant à un octet ( de 1 à 3 caractères 0 à 7) et affichant le caractère correspondant : 
+                                    <td> Sequence de caractères ASCII correspondant à un octet ( de 1 à 3 caractères 0 à 7) et affichant le caractère correspondant :
                                         echo "\115\171\123\121\114"; Affiche MYSQL</td>
                                 </tr>
                                 <tr>
@@ -609,23 +609,116 @@
                                         echo "\x4D\x79\x53\x51\x4C"; Affiche MYSQL.</td>
                                 </tr>
                         </table>
+                        <h4 class="text-center">b) Concaténer des chaînes de caractères</h4>
+                        <p>L'opérateur PHP de concaténation est le point (.), qui fusionne deux chaînes littérales ou contenues comme des variables en une seule chaîne</p>
+                        <p class="alert alert-success w-75 mx-auto">
+                            <?php
+                            $language1 = " PHP ";
+                            $language2 = " MYSQL ";
+                            $phrase = " Utilisez " . $language1 . "et" . $language2 . "pour construire un site dynamique. <br>";
+                            echo $phrase;
+                            echo "Utilisez  $language1 et  $language2 . pour construire un site dynamique. <br>";
+                            ?>
+                        </p>
                     </div>
+                    <!-- fin de la colonne (row) -->
+                </div>
+                <!-- fin de la rangée  -->
+                <hr>
+
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h2 class="text-center"><u>7 - Les tableaux</u></h2>
+                        <p>Les tableaux représentent un type composé car ils permettent de stocker sous un même nom de variable plusieurs valeurs indépendantes d'un des types de bases que vous venez de voir. C'est comme un tiroir divisé en plusieurs compartiments. Chaque compartiement, que nous nommerons un élément du tableau, est repéré par un indice numérique (le premier ayant une variable améliorée dans laquelle on stocke une multitude de valeurs. Ces valeurs peuvent être de n'importe quel type. Elles possèdent un indice dont la numérotation commence à 0). </p>
+                        <blockquote>
+                            <?php
+                            $tab[0] = 2004; // la variable $tab est un tableau par le simple fait que son nom est suivi de crochets
+                            $tab[1] = 3.14;
+                            $tab[2] = "PHP 7";
+                            $tab[3] = $tab[2] . " et MySQL"; //les elements indicés entre 2 et 35 n'existent pas
+                            $tab[] = 'coucou'; //son indice sera 36, il prend automatiquement la suite du dernier indice utilisé
+                            echo "<p class=\"alert alert-success w-50 mx-auto\">Nombre d'élements du tableau : " . COUNT($tab) . ".<br>Le langage préféré de l'open source est $tab[2]. <br> Utilisez $tab[35].</p>";
+                            var_dump($tab);
+                            print_r($tab);
+                            ?>
+                        </blockquote>
+                    </div>
+                    <!-- fin de la colonne  -->
+                    <div class="col-sm-12">
+                    <h3 class="text-center">1 - Les tableaux associatifs</h3>
+                    <p>Dans un tableau associatif, nous pouvons choisir le nom des indices ou des index, c'est-à-dire que nous associons un indice décidé par nous à une valeur. </p>
+
+                    <?php 
+                        $couleurs = array(
+                            'b' => 'bleu',
+                            'bl' => 'blanc',
+                            'r' => 'rouge',
+                        );
+                        var_dump($couleurs);
+                        print_r($couleurs);
+
+                        echo "<p class=\"alert alert-success w-50 mx-auto\">1 - La première couleur du tableau \$couleurs est : ". $couleurs['b'] ."</p>"; // dans des quotes il prend des quotes autour de son indice
+
+                        echo "<p class=\"alert alert-success w-50 mx-auto\">2 - La première couleur du tableau \$couleurs est : $couleurs[b].</p>"; // exception avec les guillamets, l'indice ne prend plus de quotes !
+
+                        // mini exo :  compter le nombre d'éléments du tableau
+                        echo "<p class=\"alert alert-success w-75 mx-auto text-center\">Nombre d'élements du tableau \$couleurs : ". count($couleurs). ".<br></p>.";
+
+                        echo "<p class=\"alert alert-success w-75 mx-auto text-center\">Nombre d'élements du tableau \$couleurs : ". sizeof($couleurs). ".<br></p>.";
+
+                        print_r(count($couleurs));
+                    ?> 
+                </div><!-- fin de la colonne -->
+
+                <div class="col-sm-12">
+                    <h3 class="text-center">2 - Les tableaux multi-dimensionnels</h3>
+                    <p>Un tableau multi-dimensionnel est un tableau qui contiendra une suite de tableaux. Chaque tableau présente une "dimension".</p>
+                    <?php 
+                        $tableauMulti = array(
+                            0 => array(
+                                'prenom' => 'Jean',
+                                'nom' => 'Castex',
+                                'tel' => '01 25 26 26 90',
+                            ),
+                            1 => array(
+                                'prenom' => 'Marc',
+                                'nom' => 'Fesneau',
+                                'tel' => '01 25 45 96 36',
+                            ),
+                            2 => array(
+                                'prenom' => 'Élisabeth',
+                                'nom' => 'Moreno',
+                                'tel' => '01 78 65 96 36',
+                            ),
+                            3 => array(
+                                'prenom' => 'Sophie',
+                                'nom' => 'Cluzel',
+                                'tel' => '01 45 14 56 35',
+                            ),
+                        );
+                        var_dump($tableauMulti);
+                        // affichez Jean :
+                        // echo $tableauMulti[0]['prenom'];
+                    ?> 
+                    <p>Pour parcourir le tableau multi-dimensionnel, on peut faire une boucle for car ces indices sont numériques, il suffit d'incrémenter</p>
+                    <ul class="alert alert-success w-50 mx-auto">
+                        <?php 
+                            for ($i = 0; $i < count($tableauMulti); $i++) {
+                                echo "<li>" . $tableauMulti[$i]['prenom']. " "  .$tableauMulti[$i]['nom']. "</li>";
+                            }
+                        ?> 
+                    </ul>
                 </div>
 
-
+            </div>
+            <br><br>
+                </div>
             </main>
         </div>
 
         <!-- fin de la partie principale, col-8 -->
 
-
-
-
-
-
-
     </div>
-
     <?php
     require('../inc/footer.inc.php'); //ici on appelle le fichier footer.inc.php
     ?>
