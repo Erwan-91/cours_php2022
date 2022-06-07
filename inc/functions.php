@@ -18,7 +18,7 @@ function jevar_dump($mavariable){ // la fonction nommée avec son paramètre : u
 }
 function jeprint_r($mavariable){
     echo "<small class=\"bg-success text-white p-2\">var_dump :<pre class=\"alert alert-success w-75\">";
-    var_dump($mavariable);
+      jeprint_r($mavariable);
     echo "</pre>";
 }
 ?>
