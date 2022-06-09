@@ -24,8 +24,8 @@
 <body>
     <div class="row">
         <div class="jumbotron bg-secondary text-center">
-            <h1 class="display-3 pt-3">Cours_php2022 - La Méthode GET</h1>
-            <p class="lead ">$_GET [] représente les données qui transitent par l'URL</p>
+            <h1 class="display-3 pt-3">Cours_php2022 - La Méthode POST</h1>
+            <p class="lead ">La méthode POST réceptionne les données d'un formulaire, $_POST est une superblobale</p>
         </div>
     </div>
     <div class="row">
@@ -41,35 +41,47 @@
             <main class="container-fluid">
                 <div class="row">
                     <hr>
-                    <h2 class="col-sm-12 text-center" id="definiton"><u>1- Introduction</u></h2>
-                    <div class="col-sm-12 col-md-6">
-                        <p>Il s'agit d'une superglobal et comme toutes les superglobales, c'est un tableau.Superglobales signifie que c'est une variable disponible partout dans le script, y compris au sein des fonctions. Les informations transit dans l'URL selon la syntaxe suivante : <code>mapage.php?indice1=valeur1&indiceN=valeurN</code> .</p>
-                        <p>Quand on récupères les données, $_GET fabrique un tableau selon le schéma suivant : <code>$_GET = array('indice1'=> 'valeur1' , 'indiceN' ='ValeurN');</code>. </p>
-                    </div>
-                    <!-- fin de la colonne  -->
-                    <div class="col-md-6 text-center">
-                        <div class="row">
-                            <div class="col-sm-12 col-md-4">
-                                <a href="method_get-ex01.php?article=Jean&couleur=bleu&prix=55">
-                                    <img src="../img/jean.jpg" alt="jean bleu" class="img-fluid">Jean bleu
-                                </a>
-                            </div>
-                            <div class="col-sm-12 col-md-4">
-                                <a href="method_get-ex01.php?article=Robe&couleur=rouge&prix=75">
-                                    <img src="../img/robe.jpg" alt="robe rouge" class="img-fluid">Robe rouge
-                                </a>
-                            </div>
-                            <div class="col-sm-12 col-md-4">
-                                <a href="method_get-ex01.php?article=Pull&couleur=blanc&prix=45">
-                                    <img src="../img/pull.jpg" alt="jean blanc" class="img-fluid">Pull blanc
-                                </a>
-                            </div>
+                    <h2 class="col-sm-12 text-center" id="definiton"><u>1- Formulaire</u></h2>
+                    <ul>
+                        <li>Un formulaire doit toujours être dans une balise <code>form</code> pour fonctionner.</li>
+                        <li>L'attribut method indique comment les données vont circuler vers le PHP.</li>
+                        <li>L'attribut action indique l'URL de destination des données (si l'attribut est vide, les données vont vers le même script ou la même page).</li>
+                        <li>Ensuite sur les names il ne faut pas les oublier sur les formulaires; ils constituent les indices de $_POST qui récéptionne les données.</li>
+                    </ul>
+
+                    <form action="../05_exos/method_form_traitement.php" method="$_POST" class="w-75 mx-auto">
+
+                        <div class="form-group">
+                            <label for="prenom">Prenom :</label>
+                            <input type="text" class="form-control" id="prenom" name="prenom" required>
                         </div>
-                    </div>
-                    <!-- fin de la colonne  -->
+                        <!-- fin champs prenom -->
+
+                        <div class="form-group">
+                            <label for="nom">Nom :</label>
+                            <input type="text" class="form-control" id="nom" name="nom" required>
+                        </div>
+                        <!-- fin champs nom -->
+
+
+
+                        <div class="form-group">
+                            <label for="commentaire">Commentaire :</label>
+                            <textarea class="form-control" id="commentaire" rows="2" name="commentaire" required></textarea>
+                        </div>
+                        <!-- fin champs commentaire -->
+
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-info">Envoyer</button>
+                        </div>
+                        <!-- fin bouton envoyer -->
+
+                    </form>
+                    <!-- fin formulaire -->
+
                 </div>
                 <!-- fin de la rangée  -->
-                 
+
                 <hr>
                 <br><br>
 
