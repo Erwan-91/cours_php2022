@@ -128,61 +128,147 @@ require_once('../inc/functions.php');
                         jeprint_r($ligne);
                         ?>
                     </div>
-                    <!-- fin de col  -->
+                    <!--fin de col-->
 
                     <div class="col-sm-12">
                         <hr>
-                        <h2 class="text-center"><span>4-</span> Faire des requêtes avec <code>query()</code> et afficher plusieurs résultats</h2>
-
+                        <br><br>
+                        <h2 class="text-center"><span>4-</span>Faire des requetes avec <code>query()</code> et afficher plusieurs résultats</h2>
                         <?php
                         $requete = $pdoENT->query("SELECT * FROM employes ORDER BY prenom");
                         // jevar_dump($requete);
                         // $ligne = $requete->fetchAll(PDO::FETCH_ASSOC);
-                        $nbr_employes = $requete->rowCount(); // rowCount() permet de compter le nombre d'enregistrements retournés par la requête.
+                        // jevar_dump($ligne);
+
+                        $nbr_employes = $requete->rowCount(); //cette methode rowCount() permet de compter le nombre d'enregistrements retournés par la requête
 
                         // jevar_dump($nbr_employes);
 
+                        echo "<p>Il y a " . $nbr_employes . " employés dans notre BDD.</p>";
 
-                        echo "<p>il y a " . $nbr_employes . " employés dans notre BDD.</p>";
-
-                        // commme nous avons plusieurs résultats dans $requete , nous devons faire une boucle pour les parcourir
-
-
-                        //fetch() va chercher la ligne suivante du jeu de résultats à chaque tour de boucle et le transforme en objet. La boucle while permet de faore avancer le curseur dans l'objet. Quand il arrive à la fin , fetch() retourne FALSE et la boucle s'arrête.
+                        // comme nous avons plusieurs résultats dans $requete, nous devons faire une boucle pour les parcourir
+                        //fetch() va chercher la ligne suivante du jeu de resultat à chaque tour de boucle et le transforme en objet . La boucle while permet de faire avancer le curseur dans l'objet. Quand il arrive à la fin , fetch() retourne FALSE et la boucle s'arrete
 
                         echo "<ul>";
                         while ($ligne = $requete->fetch(PDO::FETCH_ASSOC)) {
-                            echo "<li>" . $ligne['prenom'] . " - " . $ligne < ['nom'] . " - " . $ligne < ['sexe'] . " - " . $ligne < ['service'] . " - " . $ligne < ['date_embauche'] . " - " . $ligne < ['salaire'] . "</li>";
+                            echo "<li>" . $ligne['prenom'] . " - " . $ligne['nom'] . " - " . $ligne['sexe'] . " - " . $ligne['service'] . " - " . $ligne['date_embauche'] . " - " . $ligne['salaire'] . " €</li>";
                         }
                         echo "</ul>";
-                        // Exo afficher la liste des différents services dans une ul en mettant un service par li.
+                        // Exo afficher la liste des différents services dans une ul en mettant un service par li
+
                         $requete = $pdoENT->query("SELECT DISTINCT(service) FROM employes ORDER BY service");
                         $nbr_services = $requete->rowCount();
 
-                        echo "<div class =\"bg-info-rounded w-50 text-white mt-4 mx-auto\">";
-                        echo "<p class=\"p-2 text-white\">Il y a " . $nbr_services . " services dans l'entreprise. </p>";
+                        echo "<div class=\"bg-info rounded w-50 text-white mt-4 mx-auto\">";
+                        echo "<p class=\"p-2 text-white\">Il y a " . $nbr_services . " services dans l'entreprise : </p>";
                         echo "</div>";
 
-                        echo "<div class=\"border border-info rounded w-50 pt-3 pb-3 mx-auto\">";
-
+                        echo "<div class=\"border border-info rounded w-50 pt-3 mx-auto\">";
                         echo "<ul>";
                         while ($ligne = $requete->fetch(PDO::FETCH_ASSOC)) {
                             echo "<li>" . $ligne['service'] . "</li>";
                         }
-                        
-                        echo "</ul>";
-                        echo "</div>";
 
-                        
+                        echo "</ul>";
+                        echo "</div><br><br><hr>";
+
+
+
+                        // <!-- EXO 1/ dans un h2, compter le nombre d'employés
+                        // 2/ puis afficher toutes les informations des employés dans un tableau HTML triés par ordre alphabétique de nom
+
+                        $requete = $pdoENT->query("SELECT * FROM employes ORDER BY nom");
+                        $nbr_employes = $requete->rowCount();
+
+                        echo "<h2><span> Exo.</span> Il y a " . $nbr_employes . " employés dans la société. </h2>";
+
+                        echo "<table class=\"table table-dark table-striped\">";
+                        echo "<thead><tr><th scope=\"col\">ID</th><th scope=\"col\">Prénom</th><th scope=\"col\">Nom</th><th scope=\"col\">Sexe</th><th scope=\"col\">Service</th><th scope=\"col\">Date d'embauche</th><th scope=\"col\">Salaire</th></tr></thead>";
+                        while ($ligne = $requete->fetch(PDO::FETCH_ASSOC)) {
+
+                            echo "<tr>";
+                            echo "<td>#" . $ligne['id_employes'] . "</td>";
+                            echo "<td>";
+                            if ($ligne['sexe'] == 'f') {
+                                echo " Mme ";
+                            } else {
+                                echo " M. ";
+                            }
+                            echo $ligne['prenom'] . "</td>";
+                            echo "<td>" . $ligne['nom'] . "</td>";
+                            echo "<td>" . $ligne['sexe'] . "</td>";
+                            echo "<td>" . $ligne['service'] . "</td>";
+                            echo "<td>" . $ligne['date_embauche'] . "</td>";
+                            echo "<td>" . $ligne['salaire'] . "€</td>";
+                            echo "</tr>";
+                        }
+
+                        echo "</table>";
 
                         ?>
-                    </div>
-                     
-
-
-
+                    </div><!-- fin de la col -->
 
                 </div><!-- fin de la rangée -->
+
+                <hr>
+                <br><br>
+
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h2><span>5-</span>Requêtes préparées avec prepare()</h2>
+                        <p>Les requêtes préparées sont préconisées si vous executez plusieurs fois la même requête, ainsi vous éviterez au SGBD (système de gestion de base de données) de répéter toutes les phrases, analyses , éxecution.. On gagne en performance.</p>
+                        <p>Elles sont aussi utiles pour nettoyer les données et se prémunir des injections de type SQL (tentatives de piratage, cf. 09_securite) .Permet de renforcer la sécurité .</p>
+                        <p>Un requête préparée se réalise en 3 requêtes: </p>
+                        <ul>
+                            <li>On prépare la requête sans l'éxecuter grâce à <code>prepare()</code>. Ici :nom est un marqueur, une boîte vide et qui attend une valeur. $resultat est pour lle moment un objet PDOstatement
+                            </li>
+                            <li>On lie le marqueur à une variable $nom grâce à <code>bindParam()</code></li>
+                            <li>On va ensuite exécuter la requête grâce à <code>execute()</code></li>
+                        </ul>
+                        <?php
+                            $prenom = 'Laura'; //Ici j'ai l'info que je cherche dans une variable un résultat ex. je cherche "Grand"
+
+                            //1/ On prépare la requête 
+                            $resultat = $pdoENT->prepare("SELECT * FROM employes WHERE prenom = :prenom");// a/ prepare permet de préparer la requête sans l'exécuter b/ : prenom est un marqueur qui est vide(comme une boîte vide) et qui attend une valeur c/ $resultat est pour le moment un objet PDOstatement
+                            //2/ on lie le marqueur
+                            $resultat->bindParam(':prenom', $prenom);// bindParam permet de lier le marqueur :prenom  à la variable $prenom on lie les paramètres
+                            //$resultat->bindValue(':prenom', 'titi'); //si on a besoin de lier le marqueur à une valeur fixe...
+
+                            //3/ puis on execute la requête 
+                            $resultat->execute();// permet d'exécuter toute la requête
+                            $employe = $resultat->fetch(PDO::FETCH_ASSOC);
+
+                            // jevar_dump($employe);
+                            echo "<p class=\"alert alert-secondary\">" .$employe['prenom']. ' '.$employe['nom']. '- service: '.$employe['service']. '</p>';
+
+                            echo "<hr>";
+
+                            $sexe = 'f';
+                            $requete = $pdoENT->prepare("SELECT * FROM employes WHERE sexe = :sexe ");
+                            $requete->bindParam(':sexe', $sexe);
+                            $requete->execute();
+                            $nombre_employes = $requete->rowCount();
+                            echo "<ul>";
+                            while ($ligne = $requete->fetch(PDO::FETCH_ASSOC)){
+                                echo "<li>Mme  " .$ligne['prenom']. " ".$ligne['nom']. ", travaille au service : " .$ligne['service']. "</li>";
+                            }
+                            echo "</ul>";
+
+                            echo "<hr>";
+
+                            $resultat = $pdoENT->prepare("SELECT * FROM employes WHERE prenom = :prenom AND nom = :nom");// preparation de la requête
+                            $resultat->execute(array(// on fabrique un tableau
+                                ':nom' =>'Thoyer',
+                                ':prenom' =>'Amandine'// on peut se passer de bindParam
+                            ));
+                            // jevar_dump($resultat);
+                            $employe = $resultat->fetch(PDO::FETCH_ASSOC);//on va chercher les infos
+                            // jevar_dump($employe);
+                            echo $employe['prenom']." ".$employe['nom']." travaille au service : ". $employe['service'];//on affiche les infos
+                        ?>
+                    </div><!--fin de la col-->
+
+                </div><!--fin de la rangée-->
 
                 <hr>
                 <br><br>
@@ -190,15 +276,6 @@ require_once('../inc/functions.php');
             </main>
         </div> <!-- FIN DE LA PARTIE PRINCIPALE COL-8 -->
 
-        <div class="col-sm-2 aside">
-            <ul>
-                <!-- DES ANCRES POUR LE COURS ET LES EXOS -->
-                <li><a href="#"></a></li>
-                <li><a href="#"></a></li>
-                <li><a href="#"></a></li>
-                <li></li>
-            </ul>
-        </div>
     </div>
 
     <!-- LE FOOTER EN REQUIRE -->
