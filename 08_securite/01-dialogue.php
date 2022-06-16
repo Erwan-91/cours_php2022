@@ -89,6 +89,7 @@ require_once('../inc/functions.php');
                         echo "<ul class=\"alert alert-success\"><li>ID : " . $ligne['id_commentaire'] . "</li>
                         <li>Pseudo : " . $ligne['pseudo'] . "</li>
                     <li>Message : " . $ligne['message'] . "</li></ul>";
+
                         ?>
                     </div>
                     <!-- fin de la colonne -->
@@ -96,6 +97,27 @@ require_once('../inc/functions.php');
 
                 </div>
                 <!-- fin de row -->
+                <div class="row">
+                    <h2 class="col-sm-12 texte-center">2 - Exercice</h2>
+                    <div class="col-sm-12">
+                        <p>Compter les commentaires de la base de données dialogue et les afficher dans un tableau</p>
+                        <div class="alert alert-success">
+                            <?php
+                              $requete = $pdoDialogue->query('SELECT * FROM commentaire');
+                              $nbr_commentaires = $requete->rowCount();
+
+                              echo "<p>Il y a " . $nbr_commentaires . " commentaires dans la base de données</p>";
+                              
+                            
+                           
+
+
+
+
+                            ?>
+                        </div>
+                    </div>
+                </div>
 
 
                 <hr>
