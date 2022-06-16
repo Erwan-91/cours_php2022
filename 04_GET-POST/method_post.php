@@ -20,7 +20,7 @@
     <!-- mes styles -->
     <link rel="stylesheet" href="../css/style.css">
 </head>
-<body class="bg-dark">
+<body class="bg-light">
     <!-- JUMBOTRON -->
     <div class="jumbotron bg-dark text-white text-center">
         <h1 class="display-3">Cours PHP7 - La méthode POST</h1>

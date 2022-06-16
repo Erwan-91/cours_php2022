@@ -258,13 +258,13 @@ require_once('../inc/functions.php');
 
                             $resultat = $pdoENT->prepare("SELECT * FROM employes WHERE prenom = :prenom AND nom = :nom");// preparation de la requête
                             $resultat->execute(array(// on fabrique un tableau
-                                ':nom' =>'Thoyer',
-                                ':prenom' =>'Amandine'// on peut se passer de bindParam
+                                ':nom' =>'Wayne',
+                                ':prenom' =>'Damion'// on peut se passer de bindParam
                             ));
                             // jevar_dump($resultat);
                             $employe = $resultat->fetch(PDO::FETCH_ASSOC);//on va chercher les infos
                             // jevar_dump($employe);
-                            echo $employe['prenom']." ".$employe['nom']." travaille au service : ". $employe['service'];//on affiche les infos
+                            echo  $employe['prenom']." ". $employe['nom'] ." travaille au service : ". $employe['service'] . "" ;//on affiche les infos
                         ?>
                     </div><!--fin de la col-->
 
