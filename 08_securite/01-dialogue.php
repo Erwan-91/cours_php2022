@@ -103,20 +103,33 @@ require_once('../inc/functions.php');
                         <p>Compter les commentaires de la base de données dialogue et les afficher dans un tableau</p>
                         <div class="alert alert-success">
                             <?php
-                              $requete = $pdoDialogue->query('SELECT * FROM commentaire');
-                              $nbr_commentaires = $requete->rowCount();
+                            $requete = $pdoDialogue->query('SELECT * FROM commentaire');
+                            $nbr_commentaires = $requete->rowCount();
 
-                              echo "<p>Il y a " . $nbr_commentaires . " commentaires dans la base de données</p>";
-                              
-                            
-                           
+                            echo "<p>Il y a " . $nbr_commentaires . " commentaires dans la base de données</p>";
+                            echo "<table class=\"table table-striped table-hover\">";
+                            echo "<thead><tr><th scope = \"col\">ID</th><th scope = \"col\">Pseudo</th><th scope = \"col\">Message</th><th scope = \"col\">Date d'enregistrement</th></tr></thead>";
+                            while ($ligne = $requete->fetch(PDO::FETCH_ASSOC)) {
+                                echo "<tr>";
+                                echo "<td>#" . $ligne['id_commentaire'] . "</td>";
+                                echo "<td>" . $ligne['pseudo'] . "</td>";
+                                echo "<td>" . $ligne['message'] . "</td>";
+                                echo "<td>" . $ligne['date_enregistrement'] . "</td>";
+                                echo "</tr>";
+                            }
+                            echo "</table>";
+
+
+
 
 
 
 
                             ?>
                         </div>
+                        <!-- fin de la colonne -->
                     </div>
+                    <!-- fin de row -->
                 </div>
 
 
