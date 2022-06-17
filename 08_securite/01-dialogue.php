@@ -119,12 +119,6 @@ require_once('../inc/functions.php');
                             }
                             echo "</table>";
 
-
-
-
-
-
-
                             ?>
                         </div>
                         <!-- fin de la colonne -->
