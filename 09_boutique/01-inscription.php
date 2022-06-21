@@ -49,6 +49,10 @@ if (!empty($_POST)) {
     <div class="row">
       <div class="col-sm-12 col-md-9">
         <h1>La boutique - Inscrivez-vous !</h1>
+        <?php
+        echo $contenu;
+        ?>
+        <p>Déjé inscrit ? <a href="02-connexion.php">Connectez-vous</a> !</p>
         <form action="" method="POST" class="w-75 mx-auto">
 
           <div class="form-group">
