@@ -52,7 +52,7 @@ if (!empty($_POST)) {
         <?php
         echo $contenu;
         ?>
-        <p>Déjé inscrit ? <a href="02-connexion.php">Connectez-vous</a> !</p>
+        <p>Déjà inscrit ? <a href="02-connexion.php">Connectez-vous</a> !</p>
         <form action="" method="POST" class="w-75 mx-auto">
 
           <div class="form-group">
