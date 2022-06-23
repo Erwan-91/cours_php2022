@@ -6,8 +6,8 @@
 //connexion à la base de données
 
 //1- connexion
-$pdo = new PDO(
-    'mysql:host=localhost;dbname=contacts',// driver mysql (pourrait être oracle, IBM, ODBC...) + nom de la BDD
+$pdoSITE = new PDO(
+    'mysql:host=localhost;dbname=site',// driver mysql (pourrait être oracle, IBM, ODBC...) + nom de la BDD
     'root', // pseudo de la BDD
     '', // mdp de la BDD
     array(
