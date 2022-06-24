@@ -1,7 +1,7 @@
 <?php
 
 require_once('./inc/init.php');
-jeprint_r($_SESSION);
+// jeprint_r($_SESSION);
 
 ?>
 <!doctype html>
@@ -38,9 +38,13 @@ jeprint_r($_SESSION);
               <?php
               //  echo $_POST['mdp'] ?? '';
               ?>
+              
             </div>
+           
           </div>
+           
         </form>
+        <button><a href=""></a>a</button>
       </div>
     </div>
   </main>
